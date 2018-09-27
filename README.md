@@ -1,4 +1,4 @@
-# Integra -  CarDefense
+# CarDefense Cars
 ![CI status](https://img.shields.io/badge/build-passing-brightgreen.svg)
 ![Django Rest](https://img.shields.io/badge/django--rest--framework-3.7.7-orange.svg)
 ![Python](https://img.shields.io/badge/python-3.6-ff69b4.svg)
