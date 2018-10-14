@@ -16,9 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from rest_framework import routers
-from django.conf.urls import include, url
+from django.conf.urls import include
 from cars.views import CarViewSet
-#from api_cars.views import 
+# from api_cars.views import
 
 router = routers.SimpleRouter()
 router.register(r'car', CarViewSet)

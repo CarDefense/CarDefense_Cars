@@ -1,7 +1,8 @@
 from .serializers import CarSerializer
 from rest_framework.viewsets import ModelViewSet
 from .models import Car
-import requests
+# import requests
+
 
 class CarViewSet(ModelViewSet):
     queryset = Car.objects.all()
