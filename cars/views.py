@@ -44,5 +44,4 @@ def get_id_token(request):
 
     for t in Car.objects.filter(plate=plate):
         token = t.id_token
-    
     return Response(token)
