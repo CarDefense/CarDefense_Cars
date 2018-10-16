@@ -33,7 +33,7 @@ def validate_car(request):
 
     else:
         task = {"model": model, "color": color, "plate": plate, "id_token": id_token}
-        resp = requests.post('http://192.168.0.14:8003/car/', json=task)
+        resp = requests.post('http://192.168.0.9:8003/car/', json=task)
         return Response(resp)
 
 
@@ -41,7 +41,7 @@ def validate_car(request):
 def get_id_token(request):
 
     plate = request.data['plate']
-
+    token = 0
     for t in Car.objects.filter(plate=plate):
         token = t.id_token
     return Response(token)
