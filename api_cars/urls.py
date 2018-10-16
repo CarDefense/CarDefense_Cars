@@ -16,8 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from rest_framework import routers
-from django.conf.urls import include
-from cars.views import CarViewSet
+from cars.views import CarViewSet, validate_car
+from django.conf.urls import include, url
 # from api_cars.views import
 
 router = routers.SimpleRouter()
@@ -26,5 +26,5 @@ router.register(r'car', CarViewSet)
 urlpatterns = [
     path('', include(router.urls)),
     path('admin/', admin.site.urls),
-
+    url(r'^validate_car/$', validate_car),
 ]
