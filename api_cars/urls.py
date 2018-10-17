@@ -15,7 +15,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from rest_framework import routers
+from cars.views import CarViewSet, validate_car, get_id_token
+from django.conf.urls import include, url
+# from api_cars.views import
+
+router = routers.SimpleRouter()
+router.register(r'car', CarViewSet)
 
 urlpatterns = [
+    path('', include(router.urls)),
     path('admin/', admin.site.urls),
+    url(r'^validate_car/$', validate_car),
+    url(r'^get_id_token/$', get_id_token),
 ]
