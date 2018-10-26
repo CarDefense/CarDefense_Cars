@@ -1,7 +1,7 @@
-from rest_framework.test import APITestCase, APIClient
-from django.apps import apps
-from django.test import TestCase
-from cars.apps import CarsConfig
+# from rest_framework.test import APITestCase, APIClient
+# from django.apps import apps
+# from django.test import TestCase
+# from cars.apps import CarsConfig
 
 
 # class NotificationsTests(APITestCase):
