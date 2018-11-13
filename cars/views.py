@@ -24,8 +24,8 @@ def validate_car(request):
 
     registered = False
 
-    for t in Car.objects.filter(id_token=id_token, plate=plate):
-        if(id_token == t.id_token and plate == t.plate):
+    for car in Car.objects.filter(id_token=id_token, plate=plate):
+        if(id_token == car.id_token and plate == car.plate):
             registered = True
 
     if(registered):
@@ -33,8 +33,27 @@ def validate_car(request):
 
     else:
         task = {"model": model, "color": color, "plate": plate, "id_token": id_token}
-        resp = requests.post('http://cardefense2.eastus.cloudapp.azure.com:8003/car/', json=task)
+        resp = requests.post('http://cardefense3.eastus.cloudapp.azure.com:8003/car/', json=task)
         return Response(resp)
+
+
+@api_view(["POST"])
+def delete_car(request):
+    plate = request.data['plate']
+    id_token = request.data['id_token']
+
+    deleted = False
+
+    for car in Car.objects.filter(id_token=id_token, plate=plate):
+        if(id_token == car.id_token and plate == car.plate):
+            car.delete()
+            deleted = True
+
+    if (deleted):
+        return Response("Carro deletado")
+
+    else:
+        return Response("Carro não encontrado")
 
 
 @api_view(["POST"])
