@@ -38,7 +38,7 @@ def validate_car(request):
 
     else:
         task = {"model": model, "color": color, "plate": plate, "id_token": id_token}
-        resp = requests.post('http://cardefense3hom.eastus.cloudapp.azure.com:8003/car/', json=task)
+        resp = requests.post('http://cardefense3.eastus.cloudapp.azure.com:8003/car/', json=task)
         return Response(resp)
 
 
