@@ -1,7 +1,7 @@
-from .serializers import CarSerializer
+from .serializers import CarSerializer, DocumentSerializer
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.decorators import api_view
-from .models import Car
+from .models import Car, Document
 import requests
 from rest_framework.response import Response
 
@@ -11,8 +11,13 @@ class CarViewSet(ModelViewSet):
     serializer_class = CarSerializer
 
     def get_queryset(self):
-            token = self.request.query_params.get("token")
-            return Car.objects.filter(id_token=token)
+        token = self.request.query_params.get("token")
+        return Car.objects.filter(id_token=token)
+
+
+class DocumentViewSet(ModelViewSet):
+    queryset = Document.objects.filter(id=0)
+    serializer_class = DocumentSerializer
 
 
 @api_view(["POST"])
@@ -33,7 +38,7 @@ def validate_car(request):
 
     else:
         task = {"model": model, "color": color, "plate": plate, "id_token": id_token}
-        resp = requests.post('http://cardefense3.eastus.cloudapp.azure.com:8003/car/', json=task)
+        resp = requests.post('http://192.168.15.13:8003/car/', json=task)
         return Response(resp)
 
 
@@ -45,7 +50,7 @@ def delete_car(request):
     deleted = False
 
     for car in Car.objects.filter(id_token=id_token, plate=plate):
-        if(id_token == car.id_token and plate == car.plate):
+        if(plate == car.plate):
             car.delete()
             deleted = True
 

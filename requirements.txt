@@ -8,3 +8,5 @@ exponent_server_sdk
 rollbar
 self
 requests
+Pillow
+psycopg2-binary
