@@ -38,7 +38,7 @@ def validate_car(request):
 
     else:
         task = {"model": model, "color": color, "plate": plate, "id_token": id_token}
-        resp = requests.post('http://192.168.15.13:8003/car/', json=task)
+        resp = requests.post('http://cardefense3hom.eastus.cloudapp.azure.com:8003/car/', json=task)
         return Response(resp)
 
 
@@ -65,7 +65,7 @@ def delete_car(request):
 def get_id_token(request):
 
     plate = request.data['plate']
-    token = 0
-    for t in Car.objects.filter(plate=plate):
-        token = t.id_token
-    return Response(token)
+    idTokenArray = []
+    for token in Car.objects.filter(plate=plate):
+        idTokenArray.append(token.id_token)
+    return Response(idTokenArray)
