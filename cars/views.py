@@ -2,7 +2,6 @@ from .serializers import CarSerializer, DocumentSerializer
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.decorators import api_view
 from .models import Car, Document
-import requests
 from rest_framework.response import Response
 
 
@@ -26,6 +25,7 @@ def validate_car(request):
     color = request.data['color']
     plate = request.data['plate']
     id_token = request.data['id_token']
+    document = request.data['document']
 
     registered = False
 
@@ -34,12 +34,11 @@ def validate_car(request):
             registered = True
 
     if(registered):
-        return Response("Veículo já cadastrado para este usuário")
+        return Response("Veículo já cadastrado.")
 
     else:
-        task = {"model": model, "color": color, "plate": plate, "id_token": id_token}
-        resp = requests.post('http://cardefense3.eastus.cloudapp.azure.com:8003/car/', json=task)
-        return Response(resp)
+        Car.objects.create(model=model, color=color, plate=plate, id_token=id_token, document=document)
+        return Response("Veículo cadastrado com sucesso.")
 
 
 @api_view(["POST"])
@@ -55,10 +54,10 @@ def delete_car(request):
             deleted = True
 
     if (deleted):
-        return Response("Carro deletado")
+        return Response("Veículo deletado")
 
     else:
-        return Response("Carro não encontrado")
+        return Response("Veículo não encontrado")
 
 
 @api_view(["POST"])
