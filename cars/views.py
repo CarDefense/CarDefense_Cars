@@ -30,7 +30,7 @@ def validate_car(request):
     registered = False
 
     for car in Car.objects.filter(id_token=id_token, plate=plate):
-        if(id_token == car.id_token and plate == car.plate):
+        if(plate == car.plate):
             registered = True
 
     if(registered):
